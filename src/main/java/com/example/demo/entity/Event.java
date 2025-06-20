@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.entity.common.BaseEntity;
+import com.example.demo.entity.enums.EventCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,8 +35,9 @@ public class Event extends BaseEntity {
     @Column(name = "description", nullable = false, length = 1000)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "category", nullable = false, length = 50)
-    private String category;
+    private EventCategory category;
 
     @Column(name = "age_restriction", nullable = false)
     private Integer ageRestriction;
@@ -45,7 +47,7 @@ public class Event extends BaseEntity {
 
     // 생성자
     public Event(Venue venue, String name, String artist, String description, 
-                 String category, Integer ageRestriction) {
+                 EventCategory category, Integer ageRestriction) {
         this.venue = venue;
         this.name = name;
         this.artist = artist;
@@ -56,7 +58,7 @@ public class Event extends BaseEntity {
 
     // 비즈니스 메서드
     public void updateEventInfo(String name, String artist, String description, 
-                               String category, Integer ageRestriction) {
+                               EventCategory category, Integer ageRestriction) {
         this.name = name;
         this.artist = artist;
         this.description = description;
